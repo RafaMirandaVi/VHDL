@@ -13,7 +13,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
 
 		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/black.css" id="theme">
+		<link rel="stylesheet" href="css/theme/moon.css" id="theme">
 
 		<!-- Code syntax highlighting -->
 		<link rel="stylesheet" href="lib/css/zenburn.css">
@@ -41,7 +41,7 @@
 				<section>
 					<h1>VHDL</h1>
 					<p>
-						<small>Guadalupe Acoltzi Ruiz</small>
+						<small>Guadalupe Montserrat Acoltzi Ruiz | Alberto Rosales Garcia</small>
 					</p>
 				</section>
 
@@ -104,7 +104,7 @@
 							Desventajas
 						</h3>
 						<ul>
-							<li>Modelamos nuesttra percepción del sistema</li>
+							<li>Modelamos nuestra percepción del sistema</li>
 							<li>Puede no reflejar fielmente la realidad</li>
 						</ul>
 					</section>
@@ -249,22 +249,282 @@ signal Y: STD_LOGIC_VECTOR (0 to 3) := “0000”;
 					</section>
 
 				</section>
+				<section>
 					<section>
-						<h3>
-							Bibliografía
-						</h3>
+						<h2>
+							Programando en VHDL
+						</h2>
+					</section>
+					<section>
+						<p>
+							Un sistema digital en VHDL consta de una entidad de diseño que puede contener otras entidades que a continuación se consideran componentes de la entidad de nivel superior.
+						</p>
+					</section>
+					<section>
+						<p>
+							Cada entidad se modela mediante una declaración de entidad y un cuerpo de arquitectura. Uno puede considerar la declaración de entidad como la interfaz con el mundo exterior que define las señales de entrada y de salida, mientras que el cuerpo arquitectura contiene la descripción de la entidad y se compone de entidades interconectadas, procesos y componentes, todos los que operan simultáneamente
+						</p>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h2>Sintaxis</h2>
+					</section>
+					<section>
+						VHDL utiliza palabras clave reservadas que no pueden ser utilizados como nombres de señales o identificadores. Palabras clave e identificadores definidos por el usuario son sensibles a mayúsculas
+					</section>
+					<section>
+						Las líneas con comentarios comienzan con dos guiones adyacentes (-) y serán ignorados por el compilador. VHDL también ignora los saltos de línea y espacios adicionales. VHDL es un lenguaje fuertemente tipado que implica que uno tiene que declarar el tipo de cada objeto que puede tener un valor, como señales, constantes y variables siempre
+					</section>
+					<section>
+						<h2>Identificadores</h2>
+						<p>
+							Los identificadores son palabras definidas por el usuario que se utilizan para nombrar objetos en modelos VHDL. Hemos visto ejemplos de identificadores para señales de entrada y salida, así como el nombre de una entidad diseño y la arquitectura cuerpo. Al elegir un identificador que uno tiene que seguir estas reglas básicas
+						</p>
+					</section>
+					<section>
 						<ul>
 							<li>
-								http://es.wikipedia.org/wiki/VHDL
+								Solo puede contener caracteres alfanuméricos (AZ , az , 0-9) y el guión bajo (_)
 							</li>
 							<li>
-								http://www.ics.uci.edu/~alexv/154/VHDL-Cookbook.pdf
+								El primer carácter debe ser una letra y el último no puede ser un guión bajo.
 							</li>
 							<li>
-								http://www.people.vcu.edu/~jhtucker/f08-egre365/index.html
+								Un identificador no puede incluir dos guiones bajos consecutivos.
+							</li>
+							<li>
+								Un identificador es sensible a mayúsculas (ex. Y2 e Y2 o y2 se refieren al mismo objeto)
+							</li>
+							<li>
+								Un identificador puede ser de cualquier longitud.
 							</li>
 						</ul>
 					</section>
+					<section>
+						<h2>Keywords (Palabras reservadas)</h2>
+						<p>
+							Ciertos identificadores se utilizan por el sistema como palabras clave para uso especial, tales como constructos específicos. Estas palabras clave no se pueden utilizar como identificadores para señales u objetos que definimos. Hemos visto varias de estas palabras reservadas ya como in, out, or, and, map , final, etc. Las palabras clave son a menudo impreso en negrita.
+						</p>
+					</section>
+					<section>
+						<h2>Números</h2>
+						<p>
+							La representación número predeterminado es el sistema decimal. VHDL permite literales enteros y literales reales. Literales enteros consisten en números enteros sin el punto decimal, mientras literales reales siempre incluyen un punto decimal. Notación exponencial se permite el uso de la letra " E" o "e". Para literales enteros el exponente debe ser siempre positivo.
+						</p>
+					</section>
+					<section>
+						<h2>Char y String</h2>
+						<p>
+							Para utilizar un carácter literal en un código VHDL , uno pone en una comilla simple , como se muestra en los siguientes ejemplos :
+          
+           ' A', ' B' , ','
+ 
+Por otro lado , una cadena de caracteres se colocan entre comillas dobles , como se muestra en los siguientes ejemplos :
+ 
+           "Esto es una cadena" ,
+"Para utilizar las comillas dentro de una cadena , utilice dos comillas dobles "
+" Se trata de un " "Cadena" " . "
+ 
+Cualquier carácter de impresión puede ser incluido dentro de una cadena .
+						</p>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h2>Declaración de entidades</h2>
+						<p>
+							La declaración de entidad define el nombre de la entidad y se enumeran los puertos de entrada y salida.
+						</p>
+						<pre><code data-trim contenteditable>
+entity NAME_OF_ENTITY is [ generic generic_declarations);]
+     port (signal_names: mode type;
+            signal_names: mode type;
+                :
+            signal_names: mode type);
+end [NAME_OF_ENTITY]
+						</code></pre>
+					</section>
+					<section>
+						<p>
+							Una entidad siempre comienza con la palabras clave "entity", seguida de su nombre y la palabra clave. Siguiente son las declaraciones de puerto utilizando la palabra clave "puerto". Una declaración de entidad siempre termina con la palabra clave "end", opcionalmente [ ] seguido por el nombre de la entidad .
+						</p>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h2>
+							Arquitectura
+						</h2>
+						<p>
+							La arquitectura especifíca cómo funciona el circuito y cómo se implementa. Una entidad o circuito se pueden especificar en una variedad de formas, tales como, componentes interconectados, estructurales de comportamiento, o una combinación de los anteriores.
+						</p>
+					</section>
+					<section>
+						<h2>La arquitectura se ve de la siguiente manera</h2>
+						<p>Declaraciones</p>
+						<ul>
+							<li>Declaración de componentes</li>
+							<li>Declaración de señales</li>
+							<li>Declaración de constantes</li>
+							<li>Declaración de funciones</li>
+							<li>Declaración de procedimientos</li>
+							<li>Declaración de tipos</li>
+						</ul>
+					</section>
+					<section>
+						<p>
+							Las declaraciones en el cuerpo de la arquitectura hacen uso de los operadores lógicos. Operadores lógicos que se permiten son: AND, OR, NAND, NOR , XOR , XNOR y no.
+						</p>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h2>
+							Concurrencia
+						</h2>
+					</section>
+					<section>
+						Las sentencias se ejecutan cuando una o más de las señales en el lado derecho cambiar su valor. Puede haber un retardo de propagación asociado con este cambio. Los sistemas digitales son básicamente basada en datos y un evento que se produce en una señal dará lugar a un evento en otra señal , etc. La ejecución de las sentencias se determina por el flujo de valores de señal . Como resultado, el orden en que se dan estas declaraciones no importa. Esto está en contraste con los programas convencionales , el software que ejecutan las declaraciones de una manera secuencial o de procedimiento
+					</section>
+				</section>
+				<section>
+					<section>
+						<h2>Ejemplo</h2>
+					</section>
+					<section>
+						<pre><code data-trim contenteditable>
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.std_logic_unsigned.all;
+entity DISPLAYDOS is
+ port(num6,num5,num4,num3,num2,num1,num0,lt: in std_logic;
+ S13,S12,S11,S10,S9,S8,S7,S6,S5,S4,S3,S2,S1,S0:out std_logic);
+end DISPLAYDOS;
+architecture codificador of DISPLAYDOS is
+signal bcd: std_logic_vector(6 downto 0);
+signal entrada: integer range 0 to 64;
+signal salida:std_logic_vector(13 downto 0);
+begin
+
+						</code></pre>
+					</section>
+					<section>
+						<pre><code data-trim contenteditable>
+if lt= '1' then
+ case entrada is
+ when 12=>salida<="01100001101101";
+ when 13=>salida<="01100001111001";
+ when 14=>salida<="01100000110011";
+ when 15=>salida<="01100001011011";
+ when 16=>salida<="01100000011111";
+ when 17=>salida<="01100001110000";
+*
+*
+*
+ when 45=>salida<="01100111011011";
+ when 46=>salida<="01100110011111";
+ when 47=>salida<="01100111110000";
+ when 48=>salida<="01100111111111";
+ when 49=>salida<="01100111110011";
+ when 50=>salida<="10110111111110";
+						</code></pre>
+					</section>
+					<section>
+						<pre><code data-trim contenteditable>
+ when others =>salida<="11111111111110";
+ end case;
+ end if;
+S11<=salida(11);
+S10<=salida(10);
+S9<=salida(9);
+S8<=salida(8);
+S7<=salida(7);
+S6<=salida(6);
+S5<=salida(5);
+S4<=salida(4);
+S3<=salida(3);
+S2<=salida(2);
+S1<=salida(1);
+S0<=salida(0);
+end process;
+end codificador;
+						</code></pre>
+					</section>
+					<section>
+						<h3>Consideraciones de diseño</h3>
+						<p>
+							Para el diseño del taxímetro en VHDL se tuvieron en cuenta varias cosas muy
+importantes, a saber:
+- El diseño debía corresponder con la realidad de los taxímetros circulantes, esto
+es, valor del banderazo, incrementos, tarifas, etc.
+- Se debía iniciar en 1200 que es valor del banderazo actual y comenzar a contar a
+partir de este momento hasta máximo 10000 que es el valor máximo de una
+carrera en Ibagué.
+- Se debía tener en cuenta el valor diferencial entre una carrera en horario normal
+y una carrera en horas extras.
+- El incremento cada ciclo de reloj sería igual al de un taxí cada 100 metros que es
+lo estándar, es decir, 50 pesos cada vez.
+
+						</p>
+					</section>
+					<section>
+						<p>
+					- Un comparador debía indicar si la carrera era menor al valor de la mínima, 2600,
+y era horario normal, que debía cobrarse este valor por defecto y si era horario
+extra este mismo incrementando 400. Si el valor del taxímetro marcaba más de
+este mínimo debía mostrar el valor que aparecía en los display’s como valor
+final si era horario normal y este valor más 400 si era extra.
+- Debía contar con un botón que hiciera la comparación al final de la carrera para
+que se pudiera ver el incremento durante el recorrido de la misma.
+- El programa debía ser implementado sobre una FPGA de ALTERA, con las
+compuertas y demás dispositivos necesarios, pero, además debía resultar
+compacto, de bajo costo y mínimo número de componentes extras. 
+						</p>
+					</section>
+					<section>
+						<img data-src="image/cirq1.png" alt="">
+					</section>
+					<section>
+						<p>
+							lt : activo en alto activa los displays
+tarifa : activa en bajo cobra carrera normal
+compa : activo en alto no hace comparación hasta que se pone en bajo.
+Clear1 : mientras esté en bajo el CONTEO estará en 12 que es el valor del banderazo.
+Cuando se ponga en alto comenzará a contar a partir de 12.
+Los segmentos del display se activan en alto por lo que podemos ver cómo cambian de
+acuerdo a cada una de las condiciones anteriores.
+Mientras esté en bajo tarifa, compa esté en alto y CONTEO sea menor a 26 => va a
+mostrar 26 en los displays.
+Este valor se multiplica por 100 ya que, como el conteo incrementa de a 100 los dos
+últimos displays siempre mostrarán 00, entonces se mandan directamente a Vcc,
+excepto el segmento G que se deja N.C. Esto con el fin de depurar el código del
+programa. 
+						</p>
+					</section>
+					<section>
+						<img data-src="image/cirq2.png" alt="">
+					</section>
+					<section>
+						<img data-src="image/cirq3.png" alt="">
+					</section>
+				</section>
+				<section>
+					<h3>
+						Bibliografía
+					</h3>
+					<ul>
+						<li>
+							http://es.wikipedia.org/wiki/VHDL
+						</li>
+						<li>
+							http://www.ics.uci.edu/~alexv/154/VHDL-Cookbook.pdf
+						</li>
+						<li>
+							http://www.people.vcu.edu/~jhtucker/f08-egre365/index.html
+						</li>
+					</ul>
+				</section>
 
 			</div>
 
